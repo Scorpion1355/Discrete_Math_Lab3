@@ -99,7 +99,9 @@ class PlusState(State):
         return False
 
 class RegexFSM:
+    """ Finite State Machine """
     def __init__(self, regex_expression: str) -> None:
+        """ Main constructor for the FSM """
         self.pattern = regex_expression
         self.start_state = StartState()
         self.termination_state = TerminationState()
@@ -163,11 +165,13 @@ class RegexFSM:
         previous_state.next_states.append(self.termination_state)
 
     def reset(self):
+        """ Resets all PlustState cycle counts to 0 """
         for state in self.states:
             if isinstance(state, PlusState):
                 state.cycle_count = 0
 
     def check_string(self, input_string: str) -> bool:
+        """ Checks if the input string matches the regex pattern """
         self.reset()
         current = self.start_state
         for char in input_string:
